@@ -1,0 +1,50 @@
+<div class="col-lg-4 mx-auto">
+    <div class="card">
+        <div class="card-header">
+            Upload a Photo
+        </div>
+        <div class="card-body">
+            <form
+                (submit)="uploadPhoto(title, rutaFis, divImagen, resultado, modif,txtAltoO,txtAnchoO,txtAltoN,txtAnchoN,horizontal,urlO,urlN)">
+                <div class="form-group">
+                    <input id="titulo" type="text" class="form-control" placeholder="Photo's Title" #title>
+                </div>
+                <div #divImagen>
+                    <input type="file" class="d-none" accept=".jpg, .jpeg, .png"
+                        (change)="onPhotoSelected($event, title, rutaFis)" #photoInput>
+                    <img [src]="photoSelected || 'assets/no-image.png'" class="img-fluid" (click)="photoInput.click()">
+                    <input type="text" class="form-control" #rutaFis>
+                    <button class="btn btn-outline-primary btn-block">Upload</button>
+                </div>
+                <div #resultado style="display: none;">
+                    <div class="border border-dark">
+                        Imagen Original
+                        <div class="form-group col-md-4">
+                            <label for="altoO">Alto <input id="altoO" type="text" class="form-control" #txtAltoO>
+                            </label>
+                            <label for="anchoO">Ancho <input id="anchoO" type="text" class="form-control" #txtAnchoO>
+                            </label>
+                        </div>
+                        <label for="urlO">URL AWS <input id="urlO" type="text" class="form-control" #urlO> </label>
+                    </div>
+                    <div class="border border-dark">
+                        <label for="modif">¿Imagen modificada? <input id="modif" type="checkbox" #modif></label>
+                        <br>
+                        <label for="horizontal">Horizontal <input id="horizontal" type="checkbox" #horizontal> </label>
+                        <br>
+                    </div>
+                    <div class="border border-dark">
+                        Imagen Modificada
+                        <div class="form-group col-md-4">
+                            <label for="altoN">Alto <input id="altoN" type="text" class="form-control" #txtAltoN>
+                            </label>
+                            <label for="anchoN">Ancho <input id="anchoN" type="text" class="form-control" #txtAnchoN>
+                            </label>
+                        </div>
+                        <label for="urlN">URL AWS <input id="urlN" type="text" class="form-control" #urlN> </label>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
