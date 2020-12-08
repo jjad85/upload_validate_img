@@ -42,53 +42,71 @@ exports.listarImagenes = async () => {
 exports.obtenerTamanoImagen = async (imagen) => {
     var sizeOf = require('image-size'),
         dimensions = sizeOf(imagen.rutaImagen),
-        horizontal = new Boolean(false),
         modificiar = new Boolean(false),
-        new_ancho = 0,
-        new_alto = 0,
         porcentaje = 0,
-        old_ancho = 0,
-        old_alto = 0,
+        anchoImg = dimensions.width,
+        altoImg = dimensions.height,
+        altoHoja = config.ALTO_HOJA,
+        anchoHoja = config.ANCHO_HOJA,
+        anchoNew = anchoImg,
+        altoNew = altoImg,
         jsonResp = new Object();
 
-    old_ancho = dimensions.width;
-    old_alto = dimensions.height;
-    new_alto = old_alto;
-    new_ancho = old_ancho;
-    if (dimensions.width > config.ANCHO_HOJA) {
-        horizontal = true;
-    }
-    if (horizontal === true) {
-        if (dimensions.width > Number(config.ALTO_HOJA)) {
-            modificiar = true;
-            porcentaje =
-                Math.trunc(
-                    (Number(config.ALTO_HOJA) * 100) / dimensions.width
-                ) / 100;
-            new_alto = Math.trunc(dimensions.height * porcentaje);
-            new_ancho = Math.trunc(dimensions.width * porcentaje);
+    if (
+        anchoImg > anchoHoja ||
+        altoImg > altoHoja ||
+        anchoImg > altoHoja ||
+        altoImg > anchoHoja
+    ) {
+        if (anchoImg > altoImg) {
+            console.log('Horizontal');
+            if (altoImg - anchoHoja > anchoImg - altoHoja) {
+                console.log('Caso 1');
+                modificiar = Boolean(true);
+                porcentaje =
+                    Math.ceil(((altoImg - anchoHoja) * 100) / altoImg) / 100;
+            } else {
+                console.log('Caso 2');
+                modificiar = Boolean(true);
+                porcentaje =
+                    Math.ceil(((anchoImg - altoHoja) * 100) / anchoImg) / 100;
+            }
+        } else if (altoImg > anchoImg || altoImg == anchoImg) {
+            console.log('Vertical/Cuadrada');
+            if (altoImg - altoHoja > anchoImg - anchoHoja) {
+                console.log('Caso 1');
+                modificiar = Boolean(true);
+                porcentaje =
+                    Math.ceil(((altoImg - altoHoja) * 100) / altoImg) / 100;
+            } else {
+                console.log('Caso 2');
+                modificiar = Boolean(true);
+                porcentaje =
+                    Math.ceil(((anchoImg - anchoHoja) * 100) / anchoImg) / 100;
+            }
         }
-    } else {
-        if (dimensions.height > Number(config.ALTO_HOJA)) {
-            modificiar = true;
-            porcentaje =
-                Math.trunc(
-                    (Number(config.ALTO_HOJA) * 100) / dimensions.height
-                ) / 100;
-            new_ancho = Math.trunc(dimensions.width * porcentaje);
-            new_alto = Math.trunc(dimensions.height * porcentaje);
-        }
     }
+    console.log('Resultado: ');
+    console.log('porcentaje: ' + porcentaje);
+    console.log('altoImg: ' + altoImg);
+    console.log('anchoImg: ' + anchoImg);
+    console.log('altoNew: ' + altoNew);
+    console.log('anchoNew: ' + anchoNew);
+    console.log('altoHoja: ' + altoHoja);
+    console.log('anchoHoja: ' + anchoHoja);
+    console.log('modificar: ' + modificiar);
 
-    jsonResp.alto_orig = old_alto;
-    jsonResp.ancho_orig = old_ancho;
-    jsonResp.alto_new = new_alto;
-    jsonResp.ancho_new = new_ancho;
-    jsonResp.modificar = modificiar;
-    jsonResp.horizontal = horizontal;
     if (modificiar === true) {
-        await this.cambiarTamaño(imagen.rutaImagen, new_ancho, new_alto);
+        anchoNew = Number(anchoImg) * (1 - porcentaje);
+        altoNew = Number(altoImg) * (1 - porcentaje);
+        console.log('va a modificar img');
+        await this.cambiarTamaño(imagen.rutaImagen, anchoNew, altoNew);
     }
+    jsonResp.alto_orig = altoImg;
+    jsonResp.ancho_orig = anchoImg;
+    jsonResp.alto_new = altoNew;
+    jsonResp.ancho_new = anchoNew;
+    console.log(jsonResp);
     return jsonResp;
 };
 

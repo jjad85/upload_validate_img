@@ -4,30 +4,30 @@ const ExceptionGeneral = require('../exceptions/ExceptionGeneral');
 var pathF = require('path');
 
 exports.cargarImagen = async (req, res) => {
+    var nomImagenNew = req.body.nombreImagen,
+        jsonMod = new Object();
+
     if (!req.body.rutaImagen) {
         throw new ReqFieldException('rutaImagen');
     }
     if (!req.body.nombreImagen) {
         throw new ReqFieldException('nombreImagen');
     }
-
     let urlAWS = await imagenService.uploadImagenAWS(
         req.body.rutaImagen,
         req.body.nombreImagen
     );
+
     req.body.urlAWSOriginal = urlAWS.Location;
-    let jsonMod = await imagenService.obtenerTamanoImagen(req.body);
+    jsonMod = await imagenService.obtenerTamanoImagen(req.body);
     req.body.alto_orig = jsonMod.alto_orig;
     req.body.ancho_orig = jsonMod.ancho_orig;
     req.body.alto_new = jsonMod.alto_new;
     req.body.ancho_new = jsonMod.ancho_new;
-    req.body.modificada = jsonMod.modificar;
-    req.body.horizontal = jsonMod.horizontal;
-    var nomImagenNew = req.body.nombreImagen;
+
     var nom = nomImagenNew.split('.');
     nom[0] = nom[0] + '_update';
     nomImagenNew = nom[0] + '.' + nom[1];
-
     urlAWS = await imagenService.uploadImagenAWS(
         req.body.rutaImagen,
         nomImagenNew

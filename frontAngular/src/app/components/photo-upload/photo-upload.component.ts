@@ -56,22 +56,15 @@ export class PhotoUploadComponent implements OnInit {
   }
 
   uploadPhoto(title: HTMLInputElement, rutaFis: HTMLInputElement,
-    divImagen: HTMLInputElement, resultado: HTMLInputElement,
-    modif: HTMLInputElement, txtAltoO: HTMLInputElement,
-    txtAnchoO: HTMLInputElement, txtAltoN: HTMLInputElement,
-    txtAnchoN: HTMLInputElement, horizontal: HTMLInputElement,
+    divImagen: HTMLInputElement, resultadoOrig: HTMLInputElement,
+    resultadoNew: HTMLInputElement,
+    txtAltoO: HTMLInputElement, txtAnchoO: HTMLInputElement,
+    txtAltoN: HTMLInputElement, txtAnchoN: HTMLInputElement,
     urlO: HTMLInputElement, urlN: HTMLInputElement): Boolean {
     this.photoService.createPhoto(title.value, rutaFis.value).subscribe((res: photoUpload) => {
-      //this.router.navigate(['/photos'])
-      console.log(res);
       divImagen.style.display = 'none';
-      resultado.style.display = 'block';
-      if (res.modificada === true) {
-        modif.checked = true;
-      }
-      if (res.horizontal === true) {
-        horizontal.checked = true;
-      }
+      resultadoOrig.style.display = 'block';
+      resultadoNew.style.display = 'block';
       txtAltoO.value = res.alto_orig;
       txtAnchoO.value = res.ancho_orig;
       txtAltoN.value = res.alto_new;

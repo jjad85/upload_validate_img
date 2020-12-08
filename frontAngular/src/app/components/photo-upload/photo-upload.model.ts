@@ -5,10 +5,8 @@ export class photoUpload {
     public ancho_new: string;
     public alto_orig: string;
     public ancho_orig: string;
-    public modificada: boolean;
     public nombreImagen: string;
     public rutaImagen: string;
     public urlAWSModificada: string;
     public urlAWSOriginal: string;
-    public horizontal: boolean;
 }
