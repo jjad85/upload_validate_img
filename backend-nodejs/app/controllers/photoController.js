@@ -59,7 +59,10 @@ exports.uploadPhoto = async (req, res) => {
   var nom = nomFile.split('.');
   nom[0] = nom[0] + '_update';
   nomFile = nom[0] + '.' + nom[1];
-  urlAWS = await photoServi.uploadImagenAWS(path, nomFile);
+  nom = path.split('.');
+  nom[0] = nom[0] + '_update';
+  var pathNew = nom[0] + '.' + nom[1];
+  urlAWS = await photoServi.uploadImagenAWS(pathNew, nomFile);
   jsonResp.urlAWSModificada = urlAWS.Location;
 
   /***************************************************
