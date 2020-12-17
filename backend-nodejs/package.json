@@ -1,0 +1,31 @@
+{
+    "name": "uploadimageapp",
+    "version": "1.0.0",
+    "description": "APP Upload Image APP",
+    "main": "app.js",
+    "scripts": {
+        "test": "test",
+        "start": "node app.js",
+        "dev": "nodemon -L app.js"
+    },
+    "author": "Yennifer Marcela Tobon Yate",
+    "license": "ISC",
+    "dependencies": {
+        "aws-sdk": "^2.799.0",
+        "bcryptjs": "^2.4.3",
+        "body-parser": "^1.19.0",
+        "cors": "^2.8.5",
+        "dotenv": "^8.2.0",
+        "express": "^4.17.1",
+        "express-async-errors": "^3.1.1",
+        "image-size": "^0.9.3",
+        "jimp": "^0.16.1",
+        "mongoose": "^5.8.11",
+        "multer": "^1.4.2",
+        "path": "^0.12.7"
+    },
+    "devDependencies": {
+        "@types/uuid": "^8.3.0",
+        "nodemon": "^2.0.1"
+    }
+}

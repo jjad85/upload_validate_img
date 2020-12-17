@@ -1,0 +1,31 @@
+<div>
+    <table class="table table-sm table-striped table-bordered" #tableResul>
+        <thead class="thead-dark">
+            <tr>
+                <th scope="col" class="font-italic text-center">Name</th>
+                <th scope="col" class="font-italic text-center">Original Height</th>
+                <th scope="col" class="font-italic text-center">Original Width</th>
+                <th scope="col" class="font-italic text-center">Original Photo</th>
+                <th scope="col" class="font-italic text-center">New Height</th>
+                <th scope="col" class="font-italic text-center">New Width</th>
+                <th scope="col" class="font-italic text-center">New Photo</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let imagen of photo">
+                <th scope="row" class="align-middle">{{ imagen.title }}</th>
+                <td class="align-middle">{{ imagen.photo_height }} px</td>
+                <td class="align-middle">{{ imagen.photo_width }} px</td>
+                <td class="align-middle text-center">
+                    <a href="{{ imagen.urlAWSOriginal }}"><img src="{{ imagen.urlAWSOriginal }}"
+                            width="{{ imagen.photo_width_web }}" height="{{ imagen.photo_height_web }}"></a>
+                </td>
+                <td class="align-middle">{{ imagen.new_height }} px</td>
+                <td class="align-middle">{{ imagen.new_width }} px</td>
+                <td class="align-middle text-center"><a href="{{ imagen.urlAWSModificada }}"><img
+                            src="{{ imagen.urlAWSModificada }}" width="{{ imagen.new_width_web }}"
+                            height="{{ imagen.new_height_web }}"></a></td>
+            </tr>
+        </tbody>
+    </table>
+</div>

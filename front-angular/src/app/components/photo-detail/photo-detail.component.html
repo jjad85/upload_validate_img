@@ -1,0 +1,38 @@
+<div class="row">
+    <div class="col-sm-6">
+        <div #resultadoOrig class="card">
+            <div class="card-header">
+                <h5>Original Image</h5>
+            </div>
+            <div class="card-body">
+                <label for="photo_height" class="font-weight-bold">Height</label>
+                <input id="photo_height" type="text" class="form-control" value={{photo.photo_height}}>
+                <label for="photo_width" class="font-weight-bold">Width</label>
+                <input id="photo_width" type="text" class="form-control" value={{photo.photo_width}}>
+                <label for="photoPath" class="font-weight-bold">Original Path</label>
+                <input id="photoPath" type="text" class="form-control" value={{photo.urlAWSOriginal}}>
+                <label for="originalPhoto" class="font-weight-bold">Original Photo</label>
+                <div id="originalPhoto"><a href="{{ photo.urlAWSOriginal }}"><img src="{{ photo.urlAWSOriginal }}"
+                            width="{{ photo.photo_width_web }}" height="{{ photo.photo_height_web }}"></a></div>
+            </div>
+        </div>
+    </div>
+    <div class="col-sm-6">
+        <div #resultadoNew class="card">
+            <div class="card-header">
+                <h5>Modified Image</h5>
+            </div>
+            <div class="card-body">
+                <label for="new_height" class="font-weight-bold">New Height</label>
+                <input id="new_height" type="text" class="form-control" value={{photo.new_height}}>
+                <label for="new_width" class="font-weight-bold">New Width</label>
+                <input id="new_width" type="text" class="form-control" value={{photo.new_width}}>
+                <label for="photoPath" class="font-weight-bold">New Path</label>
+                <input id="photoPath" type="text" class="form-control" value={{photo.urlAWSModificada}}>
+                <label for="newPhoto" class="font-weight-bold">New Photo</label>
+                <div id="newPhoto"><a href="{{ photo.urlAWSModificada }}"><img src="{{ photo.urlAWSModificada }}"
+                            width="{{ photo.new_width_web }}" height="{{ photo.new_height_web }}"></a></div>
+            </div>
+        </div>
+    </div>
+</div>

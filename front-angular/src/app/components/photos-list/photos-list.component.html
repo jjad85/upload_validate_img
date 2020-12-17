@@ -1,0 +1,21 @@
+<div>
+    <table class="table table-sm table-striped table-bordered" #tableResul>
+        <thead class="thead-dark">
+            <tr>
+                <th scope="col" class="font-italic text-center">Date Created</th>
+                <th scope="col" class="font-italic text-center">Name</th>
+                <th scope="col" class="font-italic text-center">Original Photo</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let imagen of photo">
+                <th scope="row" class="align-middle">{{ imagen.created_at }}</th>
+                <td class="align-middle"><a href="{{ URL + imagen._id }}">{{ imagen.title }}</a></td>
+                <td class="align-middle text-center">
+                    <img src="{{ imagen.urlAWSOriginal }}" width="{{ imagen.photo_width_web }}"
+                        height="{{ imagen.photo_height_web }}">
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>
